@@ -66,3 +66,13 @@ function moveFile(oldDir, newDir) {
 		.then(() => console.log(`move ${file} to ${folderName}`))
 		.catch(console.error);
 }
+
+/*
+작업한 환경
+node
+	└dream_node
+	│	└projects
+	│		└photo
+	└picture
+		└test
+*/
