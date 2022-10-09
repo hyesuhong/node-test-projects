@@ -20,25 +20,49 @@ fs.readdir(picture, (error, files) => {
 		return;
 	}
 
-	files.forEach((file) => {
+	files.forEach(async (file) => {
 		const dir = path.join(picture, file);
 		const ext = path.extname(dir);
 
+		let folderName = '';
+
 		if (ext.includes('mp4') || ext.includes('mov')) {
-			console.log(dir, 'video');
+			folderName = 'video';
 		} else if (ext.includes('png') || ext.includes('aae')) {
-			console.log(dir, 'captured');
+			folderName = 'captured';
 		} else if (ext.includes('jpg')) {
 			if (file.includes('_e') || file.includes('_E')) {
-				console.log(dir, 'original');
 			} else {
-				console.log(dir, 'dupicated');
+				folderName = 'dupicated';
 			}
 		} else {
-			console.log(dir, 'original');
+		}
+
+		if (folderName !== '') {
+			const newDir = path.join(picture, folderName);
+			await fs.promises
+				.mkdir(newDir)
+				.then(async () => {
+					await moveFile(dir, path.join(newDir, file));
+				})
+				.catch(async (err) => {
+					if (err.code === 'EEXIST') {
+						await moveFile(dir, path.join(newDir, file));
+					} else {
+						console.log(file, error);
+					}
+				});
 		}
 	});
-	// mp4, mov => video
-	// png, aae => captured
-	// jpg original => duplicated
 });
+
+function moveFile(oldDir, newDir) {
+	const file = path.basename(oldDir);
+	const newDirArr = newDir.split(path.sep);
+	const folderName = newDirArr[newDirArr.length - 2];
+
+	fs.promises
+		.rename(oldDir, newDir)
+		.then(() => console.log(`move ${file} to ${folderName}`))
+		.catch(console.error);
+}
