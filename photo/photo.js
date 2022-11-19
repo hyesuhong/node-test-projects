@@ -68,7 +68,7 @@ function moveFile(oldDir, newDir) {
 }
 
 /*
-작업한 환경
+*test environment
 node
 	└dream_node
 	│	└projects

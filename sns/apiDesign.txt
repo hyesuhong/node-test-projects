@@ -1,0 +1,97 @@
+- 트윗 전체 가져오기
+	• method: GET
+	• url: /tweets
+	• request: 로그인 유저가 팔로잉한 트윗만 봐야할 경우 유저 아이디 / 혹은 전체 트윗일 경우 빈 값
+	• response: [
+		{
+			code: 200,
+			status: 'success'
+			data: []
+		},
+		{
+			code: 500,
+			status: 'server error'
+		}
+	]
+- 유저별 트윗 가져오기
+	• method: GET
+	• url: /tweets/:userID
+	• request: userID
+	• response: [
+		{
+			code: 200,
+			status: 'success'
+			data: [],
+		},
+		{
+			code: 404,
+			status: 'cannot find user'
+		},
+		{
+			code: 500,
+			status: 'server error'
+		}
+	]
+
+- 신규 트윗 생성
+	• method: POST
+	• url: /tweets/:userID?msg=tweetMSG
+	• request: userID, tweetMSG
+	• response: [
+		{
+			code: 201,
+			data: {
+				id: tweetID,
+				msg: tweetMSG,
+				cDate: createdDate,
+				...
+			}
+			status: 'success'
+		},
+		{
+			code: 400,
+			status: 'something wrong in your message(따옴표 등 사용할 수 없는 문자가 입력되었을 때)'
+		},
+		{
+			code: 500,
+			status: 'server error'
+		}
+	]
+
+- 트윗 수정(작성자만 가능)
+	• method: PUT
+	• url: /tweets?tweetID=tweetID
+	• request: tweetID
+	• response: [
+		{
+			code: 200,
+			status: 'success'
+		},
+		{
+			code: 400,
+			status: 'something wrong in your message(따옴표 등 사용할 수 없는 문자가 입력되었을 때)'
+		},
+		{
+			code: 500,
+			status: 'server error'
+		}
+	]
+
+- 트윗 삭제(작성자만 가능)
+	• method: DELETE
+	• url: /tweets?tweetID=tweetID
+	• request: tweetID
+	• response: [
+		{
+			code: 200,
+			status: 'success'
+		},
+		{
+			code: 400,
+			status: 'something wrong in your message(따옴표 등 사용할 수 없는 문자가 입력되었을 때)'
+		},
+		{
+			code: 500,
+			status: 'server error'
+		}
+	]
