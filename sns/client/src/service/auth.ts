@@ -3,7 +3,7 @@ interface ILogin {
 	password: string;
 }
 
-interface ISignup {
+export interface ISignup {
 	userId: string;
 	password: string;
 	userName: string;

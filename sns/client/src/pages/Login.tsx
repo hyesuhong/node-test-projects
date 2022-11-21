@@ -112,11 +112,14 @@ function Login({ onSignUp, onLogin }: ILogin) {
 						onChange={onChange}
 						checked={signUp}
 					/>
+					<label htmlFor='signup'>Additional Info</label>
 				</div>
-				<button className='form-btn auth-form-btn'>
+				<button className='auth-form-btn'>
 					{signUp ? 'Sign Up' : 'Sign In'}
 				</button>
 			</form>
 		</>
 	);
 }
+
+export default Login;

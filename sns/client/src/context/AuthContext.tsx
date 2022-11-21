@@ -8,6 +8,8 @@ import {
 	useMemo,
 	useState,
 } from 'react';
+import Header from '../components/Header';
+import Login from '../pages/Login';
 
 const AuthContext = createContext({});
 const contextRef = createRef();
@@ -79,8 +81,8 @@ export function AuthProvider({
 				children
 			) : (
 				<div className='app'>
-					<header></header>
-					<div className='login'></div>
+					<Header />
+					<Login onSignUp={signUp} onLogin={login} />
 				</div>
 			)}
 		</AuthContext.Provider>

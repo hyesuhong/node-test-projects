@@ -5,7 +5,7 @@ import AllPosts from './pages/AllPosts';
 import MyPosts from './pages/MyPosts';
 import PostService from './service/post';
 
-interface IUser {
+interface IAuth {
 	user?: any;
 	logout?: any;
 }
@@ -16,7 +16,7 @@ interface IApp {
 
 function App({ postService }: IApp) {
 	const navigate = useNavigate();
-	const { user, logout }: IUser = useAuth();
+	const { user, logout }: IAuth = useAuth();
 
 	const onAllPosts = () => {
 		navigate('/');
@@ -36,7 +36,7 @@ function App({ postService }: IApp) {
 	return (
 		<div className='app'>
 			<Header
-				userId={user.userId}
+				user={user.userId}
 				onLogout={onLogout}
 				onAllPosts={onAllPosts}
 				onMyPosts={onMyPosts}

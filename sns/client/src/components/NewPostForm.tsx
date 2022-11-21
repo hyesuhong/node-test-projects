@@ -34,11 +34,9 @@ const NewPostForm = ({ postService, onError, onCreated }: INewForm) => {
 				required
 				autoFocus
 				onChange={onChange}
-				className='form-input post-input'
+				className='form-input'
 			/>
-			<button type='submit' className='form-btn'>
-				Post
-			</button>
+			<button type='submit' className='form-btn'></button>
 		</form>
 	);
 };

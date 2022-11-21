@@ -20,30 +20,31 @@ const PostCard = memo(
 		return (
 			<li className='post'>
 				<section className='post-container'>
-					<Avatar url={url} userName={userName} />
-					<div className='post-body'>
+					<div className='post-head'>
+						<Avatar url={url} userName={userName} />
 						<span className='post-name'>{userName}</span>
 						<span className='post-id' onClick={() => onUserNameClick(post)}>
 							@{userId}
 						</span>
-						<span className='post-date'> · {parseDate(createdDate)}</span>
+						<span className='post-date'>{parseDate(createdDate)}</span>
+					</div>
+					<div className='post-body'>
 						<p>{msg}</p>
 						{editing && (
 							<EditPostForm post={post} onUpdate={onUpdate} onClose={onClose} />
 						)}
 					</div>
 				</section>
-				{owner && (
+				{owner && !editing && (
 					<div className='post-action'>
-						<button className='post-action-btn' onClick={() => onDelete(id)}>
-							X
-						</button>
 						<button
-							className='post-actino-btn'
+							className='post-action-btn post-edit-btn'
 							onClick={() => setEditing(true)}
-						>
-							✎
-						</button>
+						></button>
+						<button
+							className='post-action-btn post-delete-btn'
+							onClick={() => onDelete(id)}
+						></button>
 					</div>
 				)}
 			</li>
