@@ -29,7 +29,7 @@ export default class PostService {
 	async createPost(msg: string) {
 		const post = {
 			id: Date.now(),
-			createdDate: new Date().toDateString(),
+			createdDate: new Date().toString(),
 			userId: 'ssu',
 			userName: 'Ssu',
 			msg,

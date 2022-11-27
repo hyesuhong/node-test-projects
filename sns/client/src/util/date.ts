@@ -2,7 +2,6 @@ export default function parseDate(tDate: string) {
 	const created = new Date(Date.parse(tDate));
 	const now = new Date();
 	const diff = Math.floor((now.getTime() - created.getTime()) / 1000);
-
 	if (diff <= 1) {
 		return 'just now';
 	}
