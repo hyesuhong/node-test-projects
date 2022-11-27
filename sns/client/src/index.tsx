@@ -7,7 +7,9 @@ import PostService from './service/post';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthErrorEventBus, AuthProvider } from './context/AuthContext';
 
-const baseURL = process.env.REACT_APP_BASE_URL;
+const baseURL = process.env.REACT_APP_BASE_URL
+	? process.env.REACT_APP_BASE_URL
+	: 'http://localhost:8080';
 const authErrorEventBus = new AuthErrorEventBus();
 const authService = new AuthService();
 const postService = new PostService(baseURL);

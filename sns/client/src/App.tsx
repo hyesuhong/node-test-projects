@@ -43,12 +43,11 @@ function App({ postService }: IApp) {
 			/>
 			{/* <BrowserRouter> */}
 			<Routes>
-				<Route path='/' element={<AllPosts postService={postService} />}>
-					<Route
-						path='/:userId'
-						element={<MyPosts postService={postService} />}
-					/>
-				</Route>
+				<Route
+					path='/:userId'
+					element={<MyPosts postService={postService} />}
+				/>
+				<Route path='/' element={<AllPosts postService={postService} />} />
 			</Routes>
 			{/* </BrowserRouter> */}
 		</div>

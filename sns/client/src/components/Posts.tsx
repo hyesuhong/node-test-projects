@@ -23,11 +23,10 @@ const Posts = memo(({ postService, userId, addable }: IPosts) => {
 	const { user }: IUser = useAuth();
 
 	useEffect(() => {
-		userId &&
-			postService
-				.getPosts(userId)
-				.then((posts) => setPosts([...posts]))
-				.catch(onError);
+		postService
+			.getPosts(userId)
+			.then((posts) => setPosts([...posts]))
+			.catch(onError);
 	}, [postService, userId, user]);
 
 	const onCreated = (post: IPost) => {
