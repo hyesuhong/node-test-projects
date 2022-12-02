@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import router from './router/posts.js';
+import router from './router/posts';
 
 const app = express();
 
@@ -17,8 +17,15 @@ app.use((req, res, next) => {
 	res.sendStatus(404);
 });
 
-app.use((error, req, res, next) => {
-	console.error(error);
-	res.sendStatus(500);
-});
+app.use(
+	(
+		error: any,
+		req: any,
+		res: { sendStatus: (arg0: number) => void },
+		next: any
+	) => {
+		console.error(error);
+		res.sendStatus(500);
+	}
+);
 app.listen(8080);

@@ -1,5 +1,4 @@
 {
-	"include": [],
 	"compilerOptions": {
 		"outDir": "build",
 		"target": "ES6",

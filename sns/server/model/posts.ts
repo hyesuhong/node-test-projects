@@ -1,4 +1,13 @@
-let posts = [
+interface IPost {
+	id: number;
+	msg: string;
+	createdDate: string;
+	userId: string;
+	userName: string;
+	url?: string;
+}
+
+let posts: IPost[] = [
 	{
 		id: 2,
 		msg: 'Dream Coding 👍',
@@ -20,19 +29,19 @@ export async function getAll() {
 	return posts;
 }
 
-export async function getAllByUser(userId) {
+export async function getAllByUser(userId: string) {
 	return posts.filter((post) => post.userId === userId);
 }
 
-export async function getById(id) {
+export async function getById(id: number) {
 	return posts.find((post) => post.id === Number(id));
 }
 
-export async function create(msg, userId, userName) {
-	const post = {
+export async function create(msg: string, userId: string, userName: string) {
+	const post: IPost = {
 		id: Date.now(),
 		msg,
-		createdDate: new Date(),
+		createdDate: new Date().toString(),
 		userId,
 		userName,
 	};
@@ -40,7 +49,7 @@ export async function create(msg, userId, userName) {
 	return post;
 }
 
-export async function update(id, msg) {
+export async function update(id: number, msg: string) {
 	const postIndex = posts.findIndex((post) => post.id === Number(id));
 
 	if (postIndex < 0) {
@@ -51,6 +60,6 @@ export async function update(id, msg) {
 	return posts[postIndex];
 }
 
-export async function remove(id) {
+export async function remove(id: number) {
 	posts = posts.filter((post) => post.id !== Number(id));
 }
