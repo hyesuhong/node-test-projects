@@ -23,8 +23,8 @@ export const getPost: httpFunction = async (req, res) => {
 };
 
 export const createPost: httpFunction = async (req, res) => {
-	const { msg, userId, userName } = req.body;
-	const post = await postRepository.create(msg, userId, userName);
+	const { msg, userId } = req.body;
+	const post = await postRepository.create(msg, userId);
 
 	res.status(201).json(post);
 };

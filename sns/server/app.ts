@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import router from './router/posts';
+import postRouter from './router/posts';
+import authRouter from './router/auth';
 
 const app = express();
 
@@ -11,7 +12,8 @@ app.use(helmet());
 app.use(cors());
 app.use(morgan('tiny'));
 
-app.use('/posts', router);
+app.use('/posts', postRouter);
+app.use('/auth', authRouter);
 
 app.use((req, res, next) => {
 	res.sendStatus(404);

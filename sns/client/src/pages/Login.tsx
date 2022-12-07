@@ -46,8 +46,8 @@ function Login({ onSignUp, onLogin }: ILogin) {
 				return setEmail(value);
 			case 'url':
 				return setURL(value);
-			case 'signup':
-				return setSignup(checked);
+			case 'sign':
+				return setSignup(value === 'up');
 			default:
 		}
 	};
@@ -56,6 +56,29 @@ function Login({ onSignUp, onLogin }: ILogin) {
 		<>
 			<Banner text={text} isAlert={isAlert} />
 			<form className='auth-form' onSubmit={onSubmit}>
+				<div className='form-signup'>
+					<p>
+						<input
+							name='sign'
+							type='radio'
+							value='in'
+							onChange={onChange}
+							id='signin'
+							checked={!signUp}
+						/>
+						<label htmlFor='signin'>Sign In</label>
+					</p>
+					<p>
+						<input
+							name='sign'
+							type='radio'
+							value='up'
+							onChange={onChange}
+							id='signup'
+						/>
+						<label htmlFor='signup'>Sign Up</label>
+					</p>
+				</div>
 				<input
 					name='userId'
 					type='text'
@@ -104,16 +127,6 @@ function Login({ onSignUp, onLogin }: ILogin) {
 						/>
 					</>
 				)}
-				<div className='form-signup'>
-					<input
-						type='checkbox'
-						name='signup'
-						id='signup'
-						onChange={onChange}
-						checked={signUp}
-					/>
-					<label htmlFor='signup'>Additional Info</label>
-				</div>
 				<button className='auth-form-btn'>
 					{signUp ? 'Sign Up' : 'Sign In'}
 				</button>

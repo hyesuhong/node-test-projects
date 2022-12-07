@@ -337,3 +337,12 @@ li.post:last-child {
 	border: none;
 	border-radius: 6px;
 }
+
+.form-signup {
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.form-signup > p {
+	flex: 1;
+}
