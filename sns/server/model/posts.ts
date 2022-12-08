@@ -37,7 +37,7 @@ export async function getAllByUser(uid: string) {
 		return null;
 	}
 	return getAll().then((posts) => {
-		posts.filter((post) => post.userId === user.id);
+		return posts.filter((post) => post.userId === user.id);
 	});
 }
 
@@ -54,7 +54,7 @@ export async function create(msg: string, userId: number) {
 	const post: IPost = {
 		id: Date.now(),
 		msg,
-		createdDate: new Date().toString(),
+		createdDate: new Date().toJSON(),
 		userId,
 	};
 	posts = [post, ...posts];

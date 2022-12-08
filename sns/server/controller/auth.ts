@@ -16,7 +16,8 @@ type httpFunction = (
 
 // TODO: Make it secure
 const jwtSecretKey = 'u$*87v2Cgmf5$3rUEJhSG&7s@R%DrAJw';
-const jwtExpiresInDays = '2d';
+// const jwtExpiresInDays = '2d';
+const jwtExpiresInDays = 10;
 const bcryptSaltRounds = 12;
 
 export const signUp: httpFunction = async (req, res) => {
@@ -55,12 +56,12 @@ export const signIn: httpFunction = async (req, res) => {
 };
 
 export const me: httpFunction = async (req, res, next) => {
-	if (!req.userId) {
+	if (typeof req.userId !== 'number' && !req.userId) {
 		return res.status(401).json({ message: 'Authentication Error' });
 	}
 
 	const user = await userRepository.findById(req.userId);
-	if (!user) {
+	if (typeof user !== 'number' && !user) {
 		return res.status(404).json({ message: 'Cannot found user' });
 	}
 	res.status(200).json({ token: req.token, uid: user.uid });

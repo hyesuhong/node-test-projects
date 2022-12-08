@@ -26,7 +26,8 @@ function Login({ onSignUp, onLogin }: ILogin) {
 	};
 
 	const setError = (error: any) => {
-		setText(error.toStrin());
+		console.log(error);
+		setText(error.toString());
 		setIsAlert(true);
 	};
 

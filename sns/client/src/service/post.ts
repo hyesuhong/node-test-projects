@@ -1,42 +1,37 @@
+import TokenStorage from '../db/token';
 import { IHttpClient } from '../network/http';
 
 export interface IPost {
 	id: number;
 	createdDate: string;
 	msg: string;
-	userId: string;
-	userName: string;
+	userId: number;
+	uid: string;
+	name: string;
 	url?: string;
 }
 
 export default class PostService {
 	readonly http: IHttpClient;
+	readonly tokenStorage: TokenStorage;
 
-	/* posts: IPost[] = [
-		{
-			id: 1,
-			msg: 'Dream Coding 👍',
-			createdDate: '2022-11-17T23:19:57.000Z',
-			userId: 'ellie',
-			userName: 'Ellie',
-			url: 'https://joeschmoe.io/api/v1/random',
-		},
-	]; */
-
-	constructor(http: IHttpClient) {
+	constructor(http: IHttpClient, tokenStorage: TokenStorage) {
 		this.http = http;
+		this.tokenStorage = tokenStorage;
 	}
 
 	async getPosts(userId?: string) {
 		const query = userId ? `?userId=${userId}` : '';
 		return this.http.fetch(`/posts${query}`, {
 			method: 'GET',
+			headers: this.getHeaders(),
 		});
 	}
 
 	async createPost(msg: string) {
 		return this.http.fetch(`/posts`, {
 			method: 'POST',
+			headers: this.getHeaders(),
 			body: JSON.stringify({ msg, userId: 'ssu', userName: 'Ssu' }),
 		});
 	}
@@ -44,6 +39,7 @@ export default class PostService {
 	async updatePost(postId: number, msg: string) {
 		return this.http.fetch(`/posts/${postId}`, {
 			method: 'PUT',
+			headers: this.getHeaders(),
 			body: JSON.stringify({ msg }),
 		});
 	}
@@ -51,6 +47,14 @@ export default class PostService {
 	async deletePost(postId: number) {
 		return this.http.fetch(`/posts/${postId}`, {
 			method: 'DELETE',
+			headers: this.getHeaders(),
 		});
+	}
+
+	getHeaders() {
+		const token = this.tokenStorage.getToken();
+		return {
+			Authorization: `Bearer ${token}`,
+		};
 	}
 }

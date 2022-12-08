@@ -23,7 +23,7 @@ function App({ postService }: IApp) {
 	};
 
 	const onMyPosts = () => {
-		navigate(`/${user.userId}`);
+		navigate(`/${user.uid}`);
 	};
 
 	const onLogout = () => {
@@ -36,7 +36,7 @@ function App({ postService }: IApp) {
 	return (
 		<div className='app'>
 			<Header
-				user={user.userId}
+				user={user.uid}
 				onLogout={onLogout}
 				onAllPosts={onAllPosts}
 				onMyPosts={onMyPosts}

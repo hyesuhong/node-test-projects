@@ -26,16 +26,16 @@ let users: IUser[] = [
 		password: '$2b$12$qO8THWWNA/WZPGxOAsUHlOilqsDATNEgKpP7Qkgi5OyNRQGitt2w.',
 		name: 'Bob',
 		email: 'mail@mail.com',
-		url: 'https://joeschmoe.io/api/v1/random',
+		url: 'https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Wayfarers&hairColor=Black&facialHairType=BeardMedium&facialHairColor=BrownDark&clotheType=CollarSweater&clotheColor=Gray01&eyeType=Side&eyebrowType=UpDownNatural&mouthType=ScreamOpen&skinColor=DarkBrown',
 	},
 ];
 
 export async function findByUserId(uid: string) {
-	console.log(users);
 	return users.find((user) => user.uid === uid);
 }
 
 export async function findById(id: number) {
+	// console.log(users, id);
 	return users.find((user) => user.id === id);
 }
 

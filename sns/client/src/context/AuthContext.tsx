@@ -10,18 +10,19 @@ import {
 } from 'react';
 import Header from '../components/Header';
 import Login from '../pages/Login';
+import AuthService from '../service/auth';
 
 const AuthContext = createContext({});
 const contextRef = createRef();
 
 interface IAuthProvider {
-	authService: any;
+	authService: AuthService;
 	authErrorEventBus: any;
 	children: any;
 }
 
 interface IUser {
-	userName: string;
+	uid: string;
 	token: string;
 }
 
@@ -54,14 +55,23 @@ export function AuthProvider({
 			url?: string
 		) =>
 			authService
-				.signup(userId, password, userName, email, url)
-				.then((user: IUser) => setUser(user)),
+				.signup({ userId, password, userName, email, url })
+				.then((user: IUser) => {
+					setUser(user);
+				})
+				.catch(console.error),
 		[authService]
 	);
 
 	const login = useCallback(
-		async (userId: string, password: string) =>
-			authService.login(userId, password).then((user: IUser) => setUser(user)),
+		async (userId: string, password: string) => {
+			authService
+				.login({ userId, password })
+				.then((user: IUser) => {
+					setUser(user);
+				})
+				.catch(console.error);
+		},
 		[authService]
 	);
 

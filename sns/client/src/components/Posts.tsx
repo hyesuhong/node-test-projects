@@ -53,7 +53,7 @@ const Posts = memo(({ postService, userId, addable }: IPosts) => {
 			.catch((error) => setError(error.toString()));
 	};
 
-	const onUserNameClick = (post: IPost) => naviagte(`/${post.userId}`);
+	const onUserNameClick = (post: IPost) => naviagte(`/${post.uid}`);
 
 	const onError = (error: Error) => {
 		setError(error.toString());
@@ -76,7 +76,7 @@ const Posts = memo(({ postService, userId, addable }: IPosts) => {
 					<PostCard
 						key={post.id}
 						post={post}
-						owner={post.userId === user.userId}
+						owner={post.uid === user.uid}
 						onDelete={onDelete}
 						onUpdate={onUpdate}
 						onUserNameClick={onUserNameClick}

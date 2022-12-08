@@ -26,6 +26,10 @@ export const isAuth: httpFunction = async (req, res, next) => {
 	}
 
 	const token = authHeader.split(' ')[1];
+	if (token === 'null') {
+		return res.status(401).json(AUTH_ERROR);
+	}
+
 	// TODO: Make it secure
 	jwt.verify(
 		token,

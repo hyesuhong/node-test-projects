@@ -13,7 +13,7 @@ interface ICard {
 }
 const PostCard = memo(
 	({ post, owner, onDelete, onUpdate, onUserNameClick }: ICard) => {
-		const { id, userId, userName, createdDate, url, msg } = post;
+		const { id, uid, userId, name, createdDate, url, msg } = post;
 		const [editing, setEditing] = useState(false);
 		const onClose = () => setEditing(false);
 
@@ -21,10 +21,10 @@ const PostCard = memo(
 			<li className='post'>
 				<section className='post-container'>
 					<div className='post-head'>
-						<Avatar url={url} userName={userName} />
-						<span className='post-name'>{userName}</span>
+						<Avatar url={url} userName={uid ? uid : 'unknown'} />
+						<span className='post-name'>{name ? name : 'unknown'}</span>
 						<span className='post-id' onClick={() => onUserNameClick(post)}>
-							@{userId}
+							@{uid ? uid : 'unknown'}
 						</span>
 						<span className='post-date'>{parseDate(createdDate)}</span>
 					</div>
