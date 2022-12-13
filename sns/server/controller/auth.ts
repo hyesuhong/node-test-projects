@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
 import * as userRepository from '../model/auth';
+import { config } from '../config';
 
 type authRequest = Request & {
 	userId?: number;
@@ -14,12 +15,6 @@ type httpFunction = (
 	next?: NextFunction
 ) => Promise<any>;
 
-// TODO: Make it secure
-const jwtSecretKey = 'u$*87v2Cgmf5$3rUEJhSG&7s@R%DrAJw';
-// const jwtExpiresInDays = '2d';
-const jwtExpiresInDays = 10;
-const bcryptSaltRounds = 12;
-
 export const signUp: httpFunction = async (req, res) => {
 	const { uid, password, name, email, url } = req.body;
 	const found = await userRepository.findByUserId(uid);
@@ -27,7 +22,7 @@ export const signUp: httpFunction = async (req, res) => {
 		return res.status(409).json({ message: `${uid} already exists` });
 	}
 
-	const hashed = await bcrypt.hash(password, bcryptSaltRounds);
+	const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
 	const user = await userRepository.createUser({
 		uid,
 		password: hashed,
@@ -68,5 +63,7 @@ export const me: httpFunction = async (req, res, next) => {
 };
 
 function createJwtToken(id: number) {
-	return jwt.sign({ id }, jwtSecretKey, { expiresIn: jwtExpiresInDays });
+	return jwt.sign({ id }, config.jwt.secretKey, {
+		expiresIn: config.jwt.expiresInSec,
+	});
 }

@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import postRouter from './router/posts';
 import authRouter from './router/auth';
+import { config } from './config';
 
 const app = express();
 
@@ -36,4 +37,4 @@ app.use(
 		res.sendStatus(500);
 	}
 );
-app.listen(8080);
+app.listen(config.host.port);
