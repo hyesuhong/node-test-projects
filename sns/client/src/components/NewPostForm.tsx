@@ -16,7 +16,7 @@ const NewPostForm = ({ postService, onError, onCreated }: INewForm) => {
 			.createPost(post)
 			.then((created: IPost) => {
 				setPost('');
-				onCreated(created);
+				// onCreated(created);
 			})
 			.catch(onError);
 	};

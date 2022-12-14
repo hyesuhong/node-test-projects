@@ -28,6 +28,13 @@ let users: IUser[] = [
 		email: 'mail@mail.com',
 		url: 'https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Wayfarers&hairColor=Black&facialHairType=BeardMedium&facialHairColor=BrownDark&clotheType=CollarSweater&clotheColor=Gray01&eyeType=Side&eyebrowType=UpDownNatural&mouthType=ScreamOpen&skinColor=DarkBrown',
 	},
+	{
+		id: 1,
+		uid: 'ellie',
+		password: '$2b$12$qO8THWWNA/WZPGxOAsUHlOilqsDATNEgKpP7Qkgi5OyNRQGitt2w.',
+		name: 'Ellie',
+		email: 'ellie@mail.com',
+	},
 ];
 
 export async function findByUserId(uid: string) {

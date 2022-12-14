@@ -27,6 +27,9 @@ const Posts = memo(({ postService, userId, addable }: IPosts) => {
 			.getPosts(userId)
 			.then((posts) => setPosts([...posts]))
 			.catch(onError);
+
+		const stopSync = postService.onSync((post) => onCreated(post));
+		stopSync();
 	}, [postService, userId, user]);
 
 	const onCreated = (post: IPost) => {

@@ -1,5 +1,6 @@
 import * as postRepository from '../model/posts';
 import { Request, Response } from 'express';
+import { getSocketIO } from '../connection/socket';
 
 type authRequest = Request & {
 	userId?: number;
@@ -13,7 +14,7 @@ export const getPosts: httpFunction = async (req, res) => {
 	const data = await (userId
 		? postRepository.getAllByUser(userId.toString())
 		: postRepository.getAll());
-	console.log(data);
+	// console.log(data);
 	res.status(200).json(data);
 };
 
@@ -36,6 +37,7 @@ export const createPost: httpFunction = async (req, res) => {
 	const post = await postRepository.create(msg, req.userId);
 
 	res.status(201).json(post);
+	getSocketIO().emit('post', post);
 };
 
 export const updatePost: httpFunction = async (req, res) => {
@@ -51,7 +53,7 @@ export const updatePost: httpFunction = async (req, res) => {
 	const updated = await postRepository.update(Number(id), msg);
 
 	if (updated) {
-		console.log(updated);
+		// console.log(updated);
 		res.status(200).json(updated);
 	} else {
 		res.status(404).json({ message: `post id(${id}) not found` });

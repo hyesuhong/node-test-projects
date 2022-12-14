@@ -7,6 +7,7 @@ import PostService from './service/post';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthErrorEventBus, AuthProvider } from './context/AuthContext';
 import httpClient from './network/http';
+import Socket from './network/socket';
 import TokenStorage from './db/token';
 
 const baseURL = process.env.REACT_APP_BASE_URL
@@ -16,7 +17,10 @@ const authErrorEventBus = new AuthErrorEventBus();
 const HttpClient = new httpClient(baseURL, authErrorEventBus);
 const tokenStorage = new TokenStorage();
 const authService = new AuthService(HttpClient, tokenStorage);
-const postService = new PostService(HttpClient, tokenStorage);
+const socketClient = new Socket(baseURL, () => {
+	return tokenStorage.getToken();
+});
+const postService = new PostService(HttpClient, tokenStorage, socketClient);
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement

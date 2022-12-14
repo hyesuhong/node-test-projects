@@ -1,5 +1,6 @@
 import TokenStorage from '../db/token';
 import { IHttpClient } from '../network/http';
+import SocketClass from '../network/socket';
 
 export interface IPost {
 	id: number;
@@ -14,10 +15,16 @@ export interface IPost {
 export default class PostService {
 	readonly http: IHttpClient;
 	readonly tokenStorage: TokenStorage;
+	readonly socket: SocketClass;
 
-	constructor(http: IHttpClient, tokenStorage: TokenStorage) {
+	constructor(
+		http: IHttpClient,
+		tokenStorage: TokenStorage,
+		socket: SocketClass
+	) {
 		this.http = http;
 		this.tokenStorage = tokenStorage;
+		this.socket = socket;
 	}
 
 	async getPosts(userId?: string) {
@@ -56,5 +63,9 @@ export default class PostService {
 		return {
 			Authorization: `Bearer ${token}`,
 		};
+	}
+
+	onSync(callback: (...args: any[]) => void) {
+		return this.socket.onSync('post', callback);
 	}
 }

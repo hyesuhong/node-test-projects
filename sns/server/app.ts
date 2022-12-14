@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import postRouter from './router/posts';
 import authRouter from './router/auth';
 import { config } from './config';
+import { initSocket } from './connection/socket';
 
 const app = express();
 
@@ -37,4 +38,6 @@ app.use(
 		res.sendStatus(500);
 	}
 );
-app.listen(config.host.port);
+
+const server = app.listen(config.host.port);
+initSocket(server);
