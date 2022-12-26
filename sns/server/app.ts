@@ -6,6 +6,7 @@ import postRouter from './router/posts';
 import authRouter from './router/auth';
 import { config } from './config';
 import { initSocket } from './connection/socket';
+import { db } from './db/database';
 
 const app = express();
 
@@ -38,6 +39,8 @@ app.use(
 		res.sendStatus(500);
 	}
 );
+
+db.getConnection().then((connection) => console.log(connection));
 
 const server = app.listen(config.host.port);
 initSocket(server);
