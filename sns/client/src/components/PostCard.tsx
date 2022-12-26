@@ -13,7 +13,7 @@ interface ICard {
 }
 const PostCard = memo(
 	({ post, owner, onDelete, onUpdate, onUserNameClick }: ICard) => {
-		const { id, uid, userId, name, createdDate, url, msg } = post;
+		const { id, uid, userId, name, createdDate, url, message } = post;
 		const [editing, setEditing] = useState(false);
 		const onClose = () => setEditing(false);
 
@@ -29,7 +29,7 @@ const PostCard = memo(
 						<span className='post-date'>{parseDate(createdDate)}</span>
 					</div>
 					<div className='post-body'>
-						<p>{msg}</p>
+						<p>{message}</p>
 						{editing && (
 							<EditPostForm post={post} onUpdate={onUpdate} onClose={onClose} />
 						)}

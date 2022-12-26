@@ -8,7 +8,7 @@ interface IEditForm {
 }
 
 const EditPostForm = ({ post, onUpdate, onClose }: IEditForm) => {
-	const [text, setText] = useState(post.msg);
+	const [text, setText] = useState(post.message);
 
 	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();

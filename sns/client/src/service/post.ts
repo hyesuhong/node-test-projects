@@ -5,7 +5,7 @@ import SocketClass from '../network/socket';
 export interface IPost {
 	id: number;
 	createdDate: string;
-	msg: string;
+	message: string;
 	userId: number;
 	uid: string;
 	name: string;
