@@ -12,7 +12,7 @@ function required<T>(key: string, defaultValue: T) {
 export const config = {
 	jwt: {
 		secretKey: required('JWT_KEY', ''),
-		expiresInSec: required('JWT_EXPIRES_SEC', 86400),
+		expiresInSec: required('JWT_EXPIRES_SEC', 86400000),
 	},
 	bcrypt: {
 		saltRounds: required('BCRYPT_SALT_ROUNDS', 12),

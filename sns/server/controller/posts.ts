@@ -47,10 +47,12 @@ export const updatePost: httpFunction = async (req, res) => {
 	if (!post) {
 		return res.sendStatus(404);
 	}
+
 	if (post.userId !== req.userId) {
 		return res.sendStatus(403);
 	}
 	const updated = await postRepository.update(Number(id), msg);
+	console.log(updated);
 
 	if (updated) {
 		// console.log(updated);
