@@ -22,7 +22,7 @@ export const signUp: httpFunction = async (req, res) => {
 		return res.status(409).json({ message: `${uid} already exists` });
 	}
 
-	const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
+	const hashed = await bcrypt.hash(password, Number(config.bcrypt.saltRounds));
 	const user = await userRepository.createUser({
 		uid,
 		password: hashed,

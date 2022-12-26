@@ -40,7 +40,9 @@ app.use(
 	}
 );
 
-db.getConnection().then((connection) => console.log(connection));
+db.getConnection().then((connection) => {
+	/* console.log(connection) */
+});
 
 const server = app.listen(config.host.port);
 initSocket(server);
